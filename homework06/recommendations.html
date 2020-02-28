@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css"></link>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.js"></script>
+</head>
+<body>
+    <div class="ui container" style="padding-top: 10px;">
+        <h4 class="ui top attached block header">
+            Вас наверняка заинтересует:
+        </h4>
+        <div class="ui bottom attached segment">
+            <table class="ui celled table" style="">
+                <thead>
+                <th>Title</th>
+                <th>Author</th>
+                <th>#Likes</th>
+                <th>#Comments</th>
+                </thead>
+                <tbody>
+                %for row in hgood:
+                <tr>
+                    <td><a href="{{ row.url }}">{{ row.title }}</a></td>
+                    <td>{{ row.author }}</td>
+                    <td>{{ row.points }}</td>
+                    <td>{{ row.comments }}</td>
+                </tr>
+                %end
+                </tbody>
+            </table>
+        </div>
+
+        <h4 class="ui top attached block header">
+            Вас может заинетересовать:
+        </h4>
+        <div class="ui bottom attached segment">
+            <table class="ui celled table" style="">
+                <thead>
+                <th>Title</th>
+                <th>Author</th>
+                <th>#Likes</th>
+                <th>#Comments</th>
+                </thead>
+                <tbody>
+                %for row in hmaybe:
+                <tr>
+                    <td><a href="{{ row.url }}">{{ row.title }}</a></td>
+                    <td>{{ row.author }}</td>
+                    <td>{{ row.points }}</td>
+                    <td>{{ row.comments }}</td>
+                </tr>
+                %end
+                </tbody>
+            </table>
+        </div>
+
+        <h4 class="ui top attached block header">
+            Остальные новости:
+        </h4>
+        <div class="ui bottom attached segment">
+            <table class="ui celled table" style="">
+                <thead>
+                <th>Title</th>
+                <th>Author</th>
+                <th>#Likes</th>
+                <th>#Comments</th>
+                </thead>
+                <tbody>
+                %for row in hnever:
+                <tr>
+                    <td><a href="{{ row.url }}">{{ row.title }}</a></td>
+                    <td>{{ row.author }}</td>
+                    <td>{{ row.points }}</td>
+                    <td>{{ row.comments }}</td>
+                </tr>
+                %end
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</body>
+</html>
