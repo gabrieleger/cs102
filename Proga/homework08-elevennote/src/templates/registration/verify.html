@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div id="welcome" class="row">
+        <div class="col-12">
+            <main>
+                {% if activation_code %}
+                    <h3>Your activation code is {{ activation_code }}</h3>
+                    {% if user %}
+                        <h3>User {{ user.email }} successfully activated! Login now</h3>
+                    {% else %}
+                        <h3>No user found with such actiovation code!</h3>
+                    {% endif %}
+                {% else %}
+                    <h3>Success! Your account has been created. Please check your email</h3>
+                {% endif %}
+
+            </main>
+        </div>
+    </div>
+
+{% endblock %}

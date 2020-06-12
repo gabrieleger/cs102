@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% if latest_note_list %}
+        <form class="form-inline" method="get">
+            <input class="form-control mr-sm-2" name="search" type="search" placeholder="Search by note title" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+
+        {% if tag_filter or search_title %}
+            <h5><span class="text-dark">
+            Show notes
+                {% if search_title %}
+                    with title "<span class="text-secondary">{{ search_title }}</span>"
+                {% endif %}
+                {% if tag_filter %}
+                    with tag "<span class="text-secondary">{{ tag_filter }}</span>"
+                {% endif %}
+            </span>
+            </h5>
+            <br/>
+        {% endif %}
+        <ul>
+            {% for note in latest_note_list %}
+                <p>
+                    {% if note.owner == user %}
+                        <a href="{% url 'notes:update' note.id %}">{{ note.title }}</a>
+                    {% else %}
+                        <a href="{% url 'notes:detail' note.id %}">{{ note.title }}</a> <i>[Shared by {{ note.owner }}]</i>
+                    {% endif %}
+                    <br/>
+                    {{ note.body | safe }}
+                </p>
+                {% for tag in note.tags.all %}
+                    <a class="badge badge-info text-light" href="?tag={{ tag }}">{{ tag }}</a>
+                {% endfor %}
+                <hr/>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No notes are available.</p>
+    {% endif %}
+
+    {% if is_paginated %}
+        <div class="pagination">
+   <span class="step-links">
+       {% if page_obj.has_previous %}
+           <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+       {% endif %}
+
+       <span class="current">
+           Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+       </span>
+
+       {% if page_obj.has_next %}
+           <a href="?page={{ page_obj.next_page_number }}">next</a>
+       {% endif %}
+  </span>
+        </div>
+    {% endif %}
+
+    <a href="{% url 'notes:create' %}">Create a new note</a>
+
+{% endblock %}
